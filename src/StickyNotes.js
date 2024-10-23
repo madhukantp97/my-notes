@@ -1,6 +1,6 @@
 // src/StickyNotes.js
 import React, { useState, useEffect } from 'react';
-import '../src/StickyNotes.css'; // Import your CSS file
+import '../src/StickyNotes.css';
 
 const StickyNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -12,18 +12,54 @@ const StickyNotes = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [textEditorContent, setTextEditorContent] = useState('');
 
-  // Load notes from Local Storage on component mount
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem('stickyNotes')) || [];
     setNotes(savedNotes);
   }, []);
 
-  // Save notes to Local Storage whenever they change
   useEffect(() => {
     localStorage.setItem('stickyNotes', JSON.stringify(notes));
   }, [notes]);
 
-  // Notification check omitted for brevity...
+  useEffect(() => {
+    if (notificationsEnabled) {
+      Notification.requestPermission();
+    }
+  }, [notificationsEnabled]);
+
+  // Test Notification
+  useEffect(() => {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          new Notification('Test Notification', {
+            body: 'Notifications are working!',
+          });
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNotes((prevNotes) =>
+        prevNotes.map((note) => {
+          if (note.countdown !== null) {
+            const countdown = calculateCountdown(note.date);
+            console.log(`Countdown for "${note.text}": ${countdown}`); // Log countdown
+            if (countdown <= 0 && !note.notified) {
+              showNotification(note.text);
+              return { ...note, countdown: 0, notified: true }; // Mark as notified
+            }
+            return { ...note, countdown };
+          }
+          return note;
+        })
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [notes]);
 
   const handleAddNote = () => {
     if (inputValue.trim() && inputDateTime) {
@@ -69,7 +105,17 @@ const StickyNotes = () => {
 
   const calculateCountdown = (timestamp) => {
     const countdown = Math.max(0, new Date(timestamp) - new Date());
-    return Math.ceil(countdown / 1000); // Return countdown in seconds
+    return Math.ceil(countdown / 1000);
+  };
+
+  const showNotification = (message) => {
+    if (Notification.permission === 'granted') {
+      new Notification('Sticky Note Reminder', {
+        body: message,
+      });
+    } else {
+      alert(`Reminder: ${message}`); // Fallback to alert for testing
+    }
   };
 
   const handleSaveTextEditor = () => {
@@ -78,10 +124,10 @@ const StickyNotes = () => {
         text: textEditorContent,
         date: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
         notified: false,
-        countdown: null, // No countdown for text editor notes
+        countdown: null,
       };
       setNotes((prevNotes) => [...prevNotes, newNote]);
-      setTextEditorContent(''); // Clear the text editor
+      setTextEditorContent('');
     }
   };
 
@@ -125,7 +171,7 @@ const StickyNotes = () => {
 
       <div>
         {notes.map((note, index) => {
-          const isStickyNote = note.countdown !== null; // Check if it's a sticky note
+          const isStickyNote = note.countdown !== null;
           return (
             <div key={index} className={isStickyNote ? "note" : "saved-note"}>
               {isStickyNote ? (
