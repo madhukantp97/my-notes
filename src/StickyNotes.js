@@ -197,7 +197,7 @@ const StickyNotes = () => {
                 </div>
               ) : (
                 <div>
-                  <p>{note.text}</p>
+                  <pre>{note.text}</pre> {/* Use <pre> to preserve whitespace and line breaks */}
                   <small>{note.date}</small>
                   {isStickyNote && <p>Countdown: {note.countdown} seconds</p>}
                   <button onClick={() => handleEditNote(index)} className="edit-btn">
