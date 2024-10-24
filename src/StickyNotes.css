@@ -1,5 +1,3 @@
-/* StickyNotes.css */
-
 .container {
   padding: 20px;
   background: #f9f9f9;
@@ -38,72 +36,50 @@ button:hover {
   background-color: #0056b3;
 }
 
-.note {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: #ffeaa7; /* Background for sticky notes */
+.note, .saved-note {
+  margin: 10px 0;
+  padding: 10px;
   border-radius: 5px;
-  position: relative;
+}
+
+.note {
+  background-color: #f9f9e5; /* Light yellow for sticky notes */
+  border: 1px solid #ccc;
+  color: #d85f00; /* Darker orange color for sticky note text */
 }
 
 .saved-note {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: #d1c4e9; /* Different background for saved notes */
-  border-radius: 5px;
-  position: relative;
+  background-color: #e0f7fa; /* Light cyan for saved notes */
+  border: 1px solid #ccc;
+  color: #005b5c; /* Darker teal color for saved note text */
 }
 
-.note-label,
-.saved-note-label {
+.note-label, .saved-note-label {
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
-.note p,
-.saved-note p {
+.note p {
   margin: 5px 0;
 }
 
-.note small,
-.saved-note small {
-  display: block;
-  color: #666;
-  font-size: 0.9em;
-}
-
-.edit-btn,
-.delete-btn {
+button.edit-btn {
   background-color: #28a745; /* Green */
 }
 
-.edit-btn:hover {
-  background-color: #218838;
-}
-
-.delete-btn {
+button.delete-btn {
   background-color: #dc3545; /* Red */
   margin-left: 5px;
 }
 
-.delete-btn:hover {
+button.edit-btn:hover {
+  background-color: #218838;
+}
+
+button.delete-btn:hover {
   background-color: #c82333;
 }
 
-.checkbox-label {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-}
-
-.text-editor {
-  margin-top: 20px;
-  padding: 15px;
-  background: #e1f5fe; /* Background for text editor */
-  border-radius: 5px;
-}
-
-.text-editor textarea {
-  margin-bottom: 10px;
+pre {
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  word-wrap: break-word; /* Prevent overflow */
 }
