@@ -11,6 +11,7 @@ const StickyNotes = () => {
   const [editDate, setEditDate] = useState('');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [textEditorContent, setTextEditorContent] = useState('');
+  const [textEditorRows, setTextEditorRows] = useState(18); // New state for text editor rows
 
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem('stickyNotes')) || [];
@@ -175,10 +176,21 @@ const StickyNotes = () => {
 
       <div className="text-editor">
         <h3>Text Editor</h3>
+        <label>
+          Rows:
+          <input
+            type="number"
+            value={textEditorRows}
+            min="1"
+            max="30"
+            onChange={(e) => setTextEditorRows(Number(e.target.value))}
+            style={{ width: '50px', marginLeft: '10px' }}
+          />
+        </label>
         <textarea
           value={textEditorContent}
           onChange={(e) => setTextEditorContent(e.target.value)}
-          rows="18"  // Increased height
+          rows={textEditorRows} // Use dynamic rows value
           placeholder="Write your notes here..."
         />
         <button onClick={handleSaveTextEditor}>Save Note</button>
