@@ -46,10 +46,9 @@ const StickyNotes = () => {
         prevNotes.map((note) => {
           if (note.countdown !== null) {
             const countdown = calculateCountdown(note.date);
-            console.log(`Countdown for "${note.text}": ${countdown}`); // Log countdown
             if (countdown <= 0 && !note.notified) {
               showNotification(note.text);
-              return { ...note, countdown: 0, notified: true }; // Mark as notified
+              return { ...note, countdown: 0, notified: true };
             }
             return { ...note, countdown };
           }
@@ -99,6 +98,22 @@ const StickyNotes = () => {
     setNotes(updatedNotes);
   };
 
+  const moveNoteUp = (index) => {
+    if (index > 0) {
+      const newNotes = [...notes];
+      [newNotes[index], newNotes[index - 1]] = [newNotes[index - 1], newNotes[index]];
+      setNotes(newNotes);
+    }
+  };
+
+  const moveNoteDown = (index) => {
+    if (index < notes.length - 1) {
+      const newNotes = [...notes];
+      [newNotes[index], newNotes[index + 1]] = [newNotes[index + 1], newNotes[index]];
+      setNotes(newNotes);
+    }
+  };
+
   const toggleNotifications = () => {
     setNotificationsEnabled((prev) => !prev);
   };
@@ -114,7 +129,7 @@ const StickyNotes = () => {
         body: message,
       });
     } else {
-      alert(`Reminder: ${message}`); // Fallback to alert for testing
+      alert(`Reminder: ${message}`);
     }
   };
 
@@ -163,7 +178,7 @@ const StickyNotes = () => {
         <textarea
           value={textEditorContent}
           onChange={(e) => setTextEditorContent(e.target.value)}
-          rows="5"
+          rows="18"  // Increased height
           placeholder="Write your notes here..."
         />
         <button onClick={handleSaveTextEditor}>Save Note</button>
@@ -197,15 +212,13 @@ const StickyNotes = () => {
                 </div>
               ) : (
                 <div>
-                  <pre>{note.text}</pre> {/* Use <pre> to preserve whitespace and line breaks */}
+                  <pre>{note.text}</pre>
                   <small>{note.date}</small>
                   {isStickyNote && <p>Countdown: {note.countdown} seconds</p>}
-                  <button onClick={() => handleEditNote(index)} className="edit-btn">
-                    Edit
-                  </button>
-                  <button onClick={() => handleDeleteNote(index)} className="delete-btn">
-                    Delete
-                  </button>
+                  <button onClick={() => handleEditNote(index)} className="edit-btn">Edit</button>
+                  <button onClick={() => handleDeleteNote(index)} className="delete-btn">Delete</button>
+                  <button onClick={() => moveNoteUp(index)} className="move-up-btn" disabled={index === 0}>↑</button>
+                  <button onClick={() => moveNoteDown(index)} className="move-down-btn" disabled={index === notes.length - 1}>↓</button>
                 </div>
               )}
             </div>
