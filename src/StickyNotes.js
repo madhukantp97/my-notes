@@ -95,9 +95,13 @@ const StickyNotes = () => {
   };
 
   const handleDeleteNote = (index) => {
-    const updatedNotes = notes.filter((_, i) => i !== index);
-    setNotes(updatedNotes);
+    const confirmed = window.confirm("Are you sure you want to delete this note?");
+    if (confirmed) {
+      const updatedNotes = notes.filter((_, i) => i !== index);
+      setNotes(updatedNotes);
+    }
   };
+  
 
   const moveNoteUp = (index) => {
     if (index > 0) {
