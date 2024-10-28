@@ -38,6 +38,26 @@
   padding: 20px;
   color: white;
 }
+/* src/App.css */
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 0 8px 8px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
 
 @keyframes App-logo-spin {
   from {
