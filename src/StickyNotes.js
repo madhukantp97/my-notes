@@ -11,7 +11,7 @@ const StickyNotes = () => {
   const [editDate, setEditDate] = useState('');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [textEditorContent, setTextEditorContent] = useState('');
-  const [textEditorRows, setTextEditorRows] = useState(18); // New state for text editor rows
+  const [textEditorRows, setTextEditorRows] = useState(10); // New state for text editor rows
 
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem('stickyNotes')) || [];
