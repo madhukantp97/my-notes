@@ -79,6 +79,12 @@ const ToDoList = () => {
   };
 
   const handleDeleteGroup = (index) => {
+    const group = groups[index];
+    if (group.tasks.length > 0) {
+      alert("Cannot delete this group because it contains tasks.");
+      return;
+    }
+    
     const confirmed = window.confirm("Are you sure you want to delete this group?");
     if (confirmed) {
       const updatedGroups = groups.filter((_, i) => i !== index);
