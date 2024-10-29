@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import StickyNotes from './StickyNotes';
 import Calculator from './Calculator';
+import ToDoList from './ToDoList'; // Import the new component
 import './App.css'; // If you have general styles
 
 const App = () => {
@@ -11,10 +12,12 @@ const App = () => {
       <nav>
         <Link to="/">Sticky Notes</Link>
         <Link to="/calculator">Calculator</Link>
+        <Link to="/todo">To-Do List</Link> {/* Add a link for To-Do List */}
       </nav>
       <Routes>
         <Route path="/" element={<StickyNotes />} />
         <Route path="/calculator" element={<Calculator />} />
+        <Route path="/todo" element={<ToDoList />} /> {/* Route for To-Do List */}
       </Routes>
     </Router>
   );
