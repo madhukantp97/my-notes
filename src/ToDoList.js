@@ -5,7 +5,7 @@ import './ToDoList.css';
 const ToDoList = () => {
   const [groups, setGroups] = useState([]);
   const [inputGroup, setInputGroup] = useState('');
-  const [taskInputs, setTaskInputs] = useState({}); // State to track each group's task input
+  const [taskInputs, setTaskInputs] = useState({});
 
   useEffect(() => {
     const savedGroups = JSON.parse(localStorage.getItem('todoGroups')) || [];
@@ -40,12 +40,12 @@ const ToDoList = () => {
           : group
       );
       setGroups(updatedGroups);
-      setTaskInputs({ ...taskInputs, [groupIndex]: '' }); // Clear input for the specific group
+      setTaskInputs({ ...taskInputs, [groupIndex]: '' });
     }
   };
 
   const handleTaskInputChange = (groupIndex, value) => {
-    setTaskInputs({ ...taskInputs, [groupIndex]: value }); // Update the specific group's input
+    setTaskInputs({ ...taskInputs, [groupIndex]: value });
   };
 
   const toggleTaskCompletion = (groupIndex, taskIndex) => {
@@ -63,21 +63,27 @@ const ToDoList = () => {
   };
 
   const handleDeleteTask = (groupIndex, taskIndex) => {
-    const updatedGroups = groups.map((group, i) => {
-      if (i === groupIndex) {
-        return {
-          ...group,
-          tasks: group.tasks.filter((_, j) => j !== taskIndex),
-        };
-      }
-      return group;
-    });
-    setGroups(updatedGroups);
+    const confirmed = window.confirm("Are you sure you want to delete this task?");
+    if (confirmed) {
+      const updatedGroups = groups.map((group, i) => {
+        if (i === groupIndex) {
+          return {
+            ...group,
+            tasks: group.tasks.filter((_, j) => j !== taskIndex),
+          };
+        }
+        return group;
+      });
+      setGroups(updatedGroups);
+    }
   };
 
   const handleDeleteGroup = (index) => {
-    const updatedGroups = groups.filter((_, i) => i !== index);
-    setGroups(updatedGroups);
+    const confirmed = window.confirm("Are you sure you want to delete this group?");
+    if (confirmed) {
+      const updatedGroups = groups.filter((_, i) => i !== index);
+      setGroups(updatedGroups);
+    }
   };
 
   return (
@@ -104,7 +110,7 @@ const ToDoList = () => {
             <div>
               <input
                 type="text"
-                value={taskInputs[groupIndex] || ''} // Use specific group input
+                value={taskInputs[groupIndex] || ''}
                 onChange={(e) => handleTaskInputChange(groupIndex, e.target.value)}
                 placeholder="Add a new task..."
               />
