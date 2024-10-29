@@ -11,8 +11,9 @@ const App = () => {
     <Router>
       <nav>
         <Link to="/">Sticky Notes</Link>
-        <Link to="/calculator">Calculator</Link>
         <Link to="/todo">To-Do List</Link> {/* Add a link for To-Do List */}
+        <Link to="/calculator">Calculator</Link>
+
       </nav>
       <Routes>
         <Route path="/" element={<StickyNotes />} />

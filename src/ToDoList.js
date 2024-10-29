@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './ToDoList.css';
 
+const colors = ['#FF9A8B', '#9AFFA0', '#9AB8FF', '#F3FF66', '#FF9BCA', '#66FFFF']; // Group colors
+
 const ToDoList = () => {
   const [groups, setGroups] = useState([]);
   const [inputGroup, setInputGroup] = useState('');
@@ -21,6 +23,7 @@ const ToDoList = () => {
       const newGroup = {
         name: inputGroup,
         tasks: [],
+        color: colors[groups.length % colors.length], // Assign color based on group index
       };
       setGroups((prevGroups) => [...prevGroups, newGroup]);
       setInputGroup('');
@@ -108,7 +111,7 @@ const ToDoList = () => {
 
       <div className="group-list">
         {groups.map((group, groupIndex) => (
-          <div key={groupIndex} className="group">
+          <div key={groupIndex} className="group" style={{ borderColor: group.color }}>
             <h3>
               {group.name}
               <button className="delete-btn" onClick={() => handleDeleteGroup(groupIndex)}>×</button>
@@ -124,7 +127,7 @@ const ToDoList = () => {
             </div>
             <div className="task-list">
               {group.tasks.map((task, taskIndex) => (
-                <div key={taskIndex} className={`task ${task.completed ? 'completed' : ''}`}>
+                <div key={taskIndex} className={`task ${task.completed ? 'completed' : ''}`} style={{ backgroundColor: group.color, opacity: 0.6 }}>
                   <input
                     type="checkbox"
                     checked={task.completed}

@@ -59,6 +59,7 @@
     margin: 5px 0;
     background-color: #fff;
     transition: background-color 0.3s;
+    color: black; /* Change text color for better contrast */
   }
   
   .task.completed {
