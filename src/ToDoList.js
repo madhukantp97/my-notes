@@ -104,7 +104,7 @@ const ToDoList = () => {
           type="text"
           value={inputGroup}
           onChange={(e) => setInputGroup(e.target.value)}
-          placeholder="Add a new group..."
+          placeholder="Add a new Task group..."
         />
         <button onClick={handleAddGroup}>Add Group</button>
       </div>
