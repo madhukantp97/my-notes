@@ -12,6 +12,8 @@ const StickyNotes = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [textEditorContent, setTextEditorContent] = useState('');
   const [textEditorRows, setTextEditorRows] = useState(10); // New state for text editor rows
+  const [fontSize, setFontSize] = useState('16px'); // New state for font size
+  const [fontColor, setFontColor] = useState('#000000'); // New state for font color
 
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem('stickyNotes')) || [];
@@ -145,9 +147,13 @@ const StickyNotes = () => {
         date: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
         notified: false,
         countdown: null,
+        fontSize: fontSize, // Save font size
+        fontColor: fontColor, // Save font color
       };
       setNotes((prevNotes) => [...prevNotes, newNote]);
       setTextEditorContent('');
+      setFontSize('16px'); // Reset font size
+      setFontColor('#000000'); // Reset font color
     }
   };
 
@@ -191,6 +197,31 @@ const StickyNotes = () => {
             style={{ width: '50px', marginLeft: '10px' }}
           />
         </label>
+               {/* Font Size Dropdown */}
+               <label>
+          Font Size:
+          <select value={fontSize} onChange={(e) => setFontSize(e.target.value)} style={{ marginLeft: '10px' }}>
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+            <option value="24px">24px</option>
+            <option value="28px">28px</option>
+            <option value="32px">32px</option>
+          </select>
+        </label>
+
+        {/* Font Color Input */}
+        <label>
+          Font Color:
+          <input
+            type="color"
+            value={fontColor}
+            onChange={(e) => setFontColor(e.target.value)}
+            style={{ marginLeft: '10px' }}
+          />
+        </label>
         <textarea
           value={textEditorContent}
           onChange={(e) => setTextEditorContent(e.target.value)}
@@ -228,7 +259,9 @@ const StickyNotes = () => {
                 </div>
               ) : (
                 <div>
-                  <pre>{note.text}</pre>
+                    <pre style={{ fontSize: note.fontSize, color: note.fontColor }}>
+                    {note.text}
+                    </pre>
                   <small>{note.date}</small>
                   {isStickyNote && <p>Countdown: {note.countdown} seconds</p>}
                   <button onClick={() => handleEditNote(index)} className="edit-btn">Edit</button>
