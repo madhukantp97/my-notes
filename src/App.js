@@ -4,23 +4,24 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import StickyNotes from './StickyNotes';
 import Calculator from './Calculator';
 import ToDoList from './ToDoList';
+import CalendarReminder from './CalendarReminder';
 import './App.css';
 
 const App = () => {
-
   return (
     <Router>
       <nav>
         <Link to="/">Sticky Notes</Link>
         <Link to="/todo">To-Do List</Link>
         <Link to="/calculator">Calculator</Link>
+        <Link to="/calendar">Calendar</Link>
       </nav>
       <Routes>
         <Route path="/" element={<StickyNotes />} />
         <Route path="/calculator" element={<Calculator />} />
-        <Route path="/todo" element={<ToDoList />} /> {/* Route for To-Do List */}
+        <Route path="/todo" element={<ToDoList />} />
+        <Route path="/calendar" element={<CalendarReminder />} />
       </Routes>
-
     </Router>
   );
 };
