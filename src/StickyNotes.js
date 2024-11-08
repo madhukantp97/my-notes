@@ -227,6 +227,10 @@ const StickyNotes = () => {
           onChange={(e) => setTextEditorContent(e.target.value)}
           rows={textEditorRows} // Use dynamic rows value
           placeholder="Write your notes here..."
+          style={{
+            fontSize: fontSize,
+            color: fontColor,
+          }}
         />
         <button onClick={handleSaveTextEditor}>Save Note</button>
       </div>
