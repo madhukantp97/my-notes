@@ -58,7 +58,27 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+div {
+  margin: 1rem;
+}
 
+select,
+input {
+  margin-left: 0.5rem;
+}
+
+button {
+  padding: 0.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
