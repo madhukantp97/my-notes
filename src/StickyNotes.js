@@ -157,6 +157,15 @@ const StickyNotes = () => {
     }
   };
 
+  // Function to handle copying note content to clipboard
+  const handleCopyNote = (noteContent) => {
+    navigator.clipboard.writeText(noteContent).then(() => {
+      alert('Note copied to clipboard!');
+    }).catch((err) => {
+      alert('Failed to copy note: ' + err);
+    });
+  };
+
   return (
     <div className="container">
       <h2>Sticky Notes</h2>
@@ -272,6 +281,7 @@ const StickyNotes = () => {
                   <button onClick={() => handleDeleteNote(index)} className="delete-btn">Delete</button>
                   <button onClick={() => moveNoteUp(index)} className="move-up-btn" disabled={index === 0}>↑</button>
                   <button onClick={() => moveNoteDown(index)} className="move-down-btn" disabled={index === notes.length - 1}>↓</button>
+                  <button onClick={() => handleCopyNote(note.text)} className="copy-btn">Copy</button>
                 </div>
               )}
             </div>
