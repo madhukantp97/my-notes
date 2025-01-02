@@ -73,6 +73,7 @@ button.edit-btn {
 button.delete-btn {
   background-color: #dc3545; /* Red */
   margin-left: 5px;
+  color: #ddd;
 }
 .checkbox-label {
   display: flex;
@@ -85,11 +86,11 @@ button.delete-btn {
   border-radius: 4px;
 }
 button.edit-btn:hover {
-  background-color: #218838;
+  background-color: #0c4a1a;
 }
 
 button.delete-btn:hover {
-  background-color: #c82333;
+  background-color: #5c0911;
 }
 
 pre {
