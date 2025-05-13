@@ -1,55 +1,131 @@
-/* src/Calculator.css */
 .calculator-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .calculator-container h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .calculator-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .calculator-container button {
-    padding: 10px 15px;
-    margin-right: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .calculator-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .calculator-container ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .calculator-container li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin: 5px 0;
-    background-color: #f9f9f9;
-  }
-  
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-container h2,
+.calculator-container h3 {
+  text-align: center;
+  color: #333;
+}
+
+.calculator-container input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.calculator-container button {
+  flex: 1;
+  margin: 5px 2px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.calculator-container button:hover {
+  background-color: #0056b3;
+}
+
+.calculator-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.calculator-container li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 5px 0;
+  background: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.conversion-options {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversion-options button {
+  margin: 5px 0;
+}
+
+.close-btn {
+  background-color: #dc3545;
+  margin-top: 10px;
+}
+
+.close-btn:hover {
+  background-color: #b02a37;
+}
+
+.toggle-switch {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.sci-keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.sci-keyboard button {
+  flex: 1 0 22%;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sci-keyboard button:hover {
+  background-color: #5a6268;
+}
